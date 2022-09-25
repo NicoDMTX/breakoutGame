@@ -6,6 +6,9 @@ const boardWidth = 560;
 const UserStart = [230, 10];
 let currentPosition = UserStart;
 
+const ballStart = [270,40]
+let currentBallPosition = ballStart
+
 /**
  * Individual block
  */
@@ -55,9 +58,8 @@ const addBlocks = () => {
 addBlocks();
 
 const user = document.createElement('div')
-    user.classList.add('user')
-    
-    grid.appendChild(user)
+user.classList.add('user')
+grid.appendChild(user)
 
 /**
  * Draw user
@@ -66,7 +68,25 @@ const drawUser = () => {
     user.style.left = currentPosition[0] + 'px'
     user.style.bottom = currentPosition[1] + 'px'
 }
+drawUser()
 
+const ball = document.createElement('div')
+
+ball.classList.add('ball');
+grid.appendChild(ball);
+
+const drawBall = () => {
+    ball.style.left = currentBallPosition[0] + 'px'
+    ball.style.bottom = currentBallPosition[1] + 'px'
+}
+
+drawBall();
+
+
+/**
+ * Move user right and left 
+ * @param {*event} e 
+ */
 const moveUser = (e) => {
     switch(e.key) {
         case 'ArrowLeft':
@@ -76,7 +96,7 @@ const moveUser = (e) => {
             }
             break;
         case 'ArrowRight':
-            if (currentPosition[0] < boardWidth - 120) {
+            if (currentPosition[0] < boardWidth - blockWidth - 20) {
                 currentPosition[0] += 10
                 drawUser()
             }
@@ -85,6 +105,10 @@ const moveUser = (e) => {
 }
 
 document.addEventListener('keydown', moveUser);
+
+
+
+
 
 
 
